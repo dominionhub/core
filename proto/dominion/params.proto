@@ -1,0 +1,12 @@
+syntax = "proto3";
+package dominion.dominion;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "dominion/x/dominion/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (gogoproto.goproto_stringer) = false;
+  
+}
