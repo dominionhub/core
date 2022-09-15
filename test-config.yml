@@ -1,0 +1,23 @@
+accounts:
+  - name: alice
+    coins: [ "2000000000minion", "200000000stake" ]
+    mnemonic: "sell steak donate cost ice object hawk cool hill similar economy school spy cactus crater pizza leisure bitter toast regular auction kitten mansion broken"
+  - name: bob
+    coins: [ "1000000000minion", "100000000stake" ]
+    #address: "dom1hyuhvzwgg2a9y59ftj8vqks24u5tsc3j7cny9a"
+    mnemonic: "club art earn depend empower decade toast tuna require have ocean must rare engage often better property nurse depend frozen art accident team umbrella"
+  - name: charlie
+    coins: [ "1000000000minion", "100000000stake" ]
+    #address: "dom1unv8fy5jhuuxc6utds26hrzrgstef65gzu78qx"
+    mnemonic: "winner deputy ketchup aspect deliver expect month focus strong armor dwarf theory nuclear much own admit feed marriage morning prize drama cheese soldier immense"
+validator:
+  name: alice
+  staked: "100000000stake"
+client:
+  openapi:
+    path: "docs/static/openapi.yml"
+#  vuex:
+#    path: "vue/src/store"
+faucet:
+  name: charlie
+  coins: [ "5stake", "1000000000minion" ]
