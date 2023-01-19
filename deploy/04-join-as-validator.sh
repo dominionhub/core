@@ -43,4 +43,6 @@ dominiond tx staking create-validator \
   --gas-adjustment="1.5" \
   --gas-prices="0.025uminion" \
   --from=alice-beta \
-  --node="http://${PRIMARY_VALIDATOR_ADDRESS}:26657"
+  --keyring-backend test \
+  --node="http://${PRIMARY_VALIDATOR_ADDRESS}:26657" \
+  -y

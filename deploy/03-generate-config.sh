@@ -23,33 +23,33 @@ create_primary_validator_config(){
   echo "Generating default accounts"
   # generate default accounts
   # Setup an alice account
-  local ALICE_TEXT=$(dominiond keys add alice-alpha)
+  local ALICE_TEXT=$(dominiond keys add --keyring-backend test alice-alpha)
   local ALICE_ACCOUNT=$(echo $ALICE_TEXT | grep address | awk '{ print $2 }')
   echo "ALICE_TEXT:"
   echo $ALICE_TEXT \n
   echo $ALICE_TEXT >> alice.txt
   
   # Setup a bob account
-  local BOB_TEXT=$(dominiond keys add bob-alpha | grep address | awk '{ print $2 }')
+  local BOB_TEXT=$(dominiond keys add --keyring-backend test bob-alpha | grep address | awk '{ print $2 }')
   echo "BOB_TEXT:"
   echo $BOB_TEXT \n
   echo $BOB_TEXT >> bob.txt
   
   # Setup the genesis accounts 
-  dominiond add-genesis-account $(dominiond keys show -a alice-alpha 1000000000000uminion
-  dominiond add-genesis-account $(dominiond keys show -a bob-alpha 1000000000000uminion
+  dominiond add-genesis-account $(dominiond keys show -a alice-alpha --keyring-backend test) 1000000000000uminion
+  dominiond add-genesis-account $(dominiond keys show -a bob-alpha --keyring-backend test) 1000000000000uminion
   
   # Setup alice as the validator
-  dominiond gentx alice-alpha 10000000000uminion --chain-id $CHAIN_ID
+  dominiond gentx alice-alpha 10000000000uminion --keyring-backend test --chain-id $CHAIN_ID
   
   # collect the genesis transaction
   dominiond collect-gentxs
   
   # Echo the account addresses
   echo "ALICE_ACCOUNT:"
-  echo $(dominiond keys show -a alice-alpha)
+  echo $(dominiond keys show -a alice-alpha --keyring-backend test)
   echo "BOB_ACCOUNT:"
-  echo $(dominiond keys show -a bob-alpha)
+  echo $(dominiond keys show -a bob-alpha --keyring-backend test)
   
   dasel put -t bool -f $app_toml api.enable -v true
   dasel put -t string -f $app_toml api.address -v tcp://0.0.0.0:1317
@@ -75,13 +75,13 @@ create_validator_config(){
   echo "Generating default accounts"
   # generate default accounts
   # ## Setup an alice account
-  local ALICE_TEXT=$(dominiond keys add alice-beta)
+  local ALICE_TEXT=$(dominiond keys add --keyring-backend test alice-beta)
   local ALICE_ACCOUNT=$(echo $ALICE_TEXT | grep address | awk '{ print $2 }')
   echo "ALICE_TEXT: $ALICE_TEXT\n"
   echo $ALICE_TEXT >> alice.txt
   
   # Setup a bob account
-  local BOB_TEXT=$(dominiond keys add bob-beta | grep address | awk '{ print $2 }')
+  local BOB_TEXT=$(dominiond keys add --keyring-backend test bob-beta | grep address | awk '{ print $2 }')
   echo "BOB_TEXT: $BOB_TEXT\n"
   echo $BOB_TEXT >> bob.txt
 
@@ -146,5 +146,5 @@ fi
 
 
 # using simd send 100 tokens from alice to bob 
-# dominiond tx bank send alice-alpha bob-beta 1000000000uminion -y --from alice-alpha
+# dominiond tx bank send $(dominiond keys show -a alice-alpha --keyring-backend test) $(dominiond keys show -a bob-alpha --keyring-backend test) 1000000000uminion --keyring-backend test -y
 
