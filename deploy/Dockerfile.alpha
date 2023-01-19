@@ -1,28 +1,32 @@
-FROM ignitehq/cli:latest
-USER root
+FROM debian:stable-slim
+#USER root
 WORKDIR /app
 COPY ./ .
-RUN /bin/bash -c 'ARCH=`uname -m` && \
-    if [ "$ARCH" == "aarch64" ]; then export ARCH="arm64"; else export ARCH="amd64"; fi && \
-    export URL=https://github.com/TomWright/dasel/releases/latest/download/dasel_linux_$ARCH && \
-    wget $URL -O /go/bin/dasel && chmod +x /go/bin/dasel'
-#RUN mv /app/test-config.yml /app/config.yml
-RUN ignite chain build --release
-RUN tar -xvf ./release/dominion_linux_*.tar.gz
+#RUN /bin/bash -c 'ARCH=`uname -m` && \
+#    if [ "$ARCH" == "aarch64" ]; then export ARCH="arm64"; else export ARCH="amd64"; fi && \
+#    export URL=https://github.com/TomWright/dasel/releases/latest/download/dasel_linux_$ARCH && \
+#    wget $URL -O /go/bin/dasel && chmod +x /go/bin/dasel'
+##RUN mv /app/test-config.yml /app/config.yml
+#RUN ignite chain build --release
+#RUN tar -xvf ./release/dominion_linux_*.tar.gz
+#RUN cp ./dominiond /bin/
+ENV PATH=$PATH:/usr/local/go/bin
+RUN ./deploy/01-install.sh
+RUN ./deploy/02-build.sh
+RUN ./deploy/03-generate-config.sh -c=dominion -m=alpha -pv 
 
-FROM alpine:latest
-RUN apk --no-cache add ca-certificates
-WORKDIR /app
-COPY --from=0 /app/deploy/ ./deploy/
-COPY --from=0 /app/dominiond /bin/
-COPY --from=0 /go/bin/dasel /bin/
+# ======== Below is NOT Working ===========
+#FROM golang:1.18-alpine
+#WORKDIR /app
+#COPY --from=0 /app/deploy/ ./deploy/
+#COPY --from=0 /app/dominiond /bin/
+#COPY --from=0 /go/bin/dasel /bin/
 #a indefinite loop to keep the container running
-ENTRYPOINT ["tail", "-f", "/dev/null"]
+#ENTRYPOINT ["tail", "-f", "/dev/null"]
 
-#RUN ./deploy/generate-config.sh -c dominion -m alpha -pv 
+EXPOSE 1317
+EXPOSE 26657
+EXPOSE 26656
+EXPOSE 9090
 #
-#EXPOSE 1317
-#EXPOSE 26657
-#EXPOSE 4500
-##
-#ENTRYPOINT ["dominiond"]
+ENTRYPOINT ["dominiond", "start"]

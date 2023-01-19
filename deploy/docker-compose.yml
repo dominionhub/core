@@ -1,0 +1,43 @@
+version: "3.9" 
+services:
+  node0:
+    container_name: dominion-alpha
+    build: 
+      context: ../
+      dockerfile: deploy/Dockerfile.alpha
+    ports:
+      - 1317:1317
+      - 2345:2345
+      - 26656-26657:26656-26657
+      - 9090:9090
+      - 9091:9091
+    networks:
+      dominion-localnet:
+        ipv4_address: 192.168.0.2
+  node1:
+    container_name: dominion-beta
+    build: 
+      context: ../
+      dockerfile: deploy/Dockerfile.beta
+    ports:
+      - 1417:1317
+      - 2445:2345
+      - 27656-27657:26656-26657
+      - 9190:9090
+      - 9191:9091
+    networks:
+      dominion-localnet:
+        ipv4_address: 192.168.0.3
+    entrypoint:
+      - /bin/bash
+      - -c
+      - | 
+        ./deploy/03-generate-config.sh -c=dominion -m=beta -pva=192.168.0.2
+        dominiond start
+
+networks:
+  dominion-localnet:
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.0.0/24

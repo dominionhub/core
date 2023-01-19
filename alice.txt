@@ -1,0 +1,4 @@
+- name: alice type: local address: dom19k9hhmgpafxct8pjsekvuc32jw64n2qjvaecl8 pubkey: '{"@type":"/cosmos.crypto.secp256k1.PubKey","key":"AmX2OWDeHGfsXJQ3wdWegkG+0WONNp+fmdM7eU5Tihic"}' mnemonic: ""
+- name: alice type: local address: dom13k03x80ryhnx433574m8f6qg8qmz45rsgupg9k pubkey: '{"@type":"/cosmos.crypto.secp256k1.PubKey","key":"AkTFqBVf4YCNgNc99IlNfFZgJBnDI2v9au/HBCjG9mMU"}' mnemonic: ""
+- name: alice type: local address: dom1wdwk6p3v8seg5w9h00aes4p6hyd36al2aurynr pubkey: '{"@type":"/cosmos.crypto.secp256k1.PubKey","key":"AvptFWaNHJT0w+iOB7ziwwlWJ3v5qiRtOg/ec8b26gFV"}' mnemonic: ""
+- name: alice type: local address: dom1sth6c3mty8zngnf6k3crdmhka5sgs79gdg5e7q pubkey: '{"@type":"/cosmos.crypto.secp256k1.PubKey","key":"A8f16JkeM9SLjM+WUManhwNehgD2oDkUuful2vCnTiDb"}' mnemonic: ""
