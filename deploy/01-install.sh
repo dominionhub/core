@@ -50,6 +50,8 @@ then
     tar -C /usr/local -xzf go1.18.10.$OS-$ARCH.tar.gz
     rm go1.18.10.$OS-$ARCH.tar.gz
     export PATH=$PATH:/usr/local/go/bin
+    #link go to /usr/local/bin/go so that it can be used from anywhere
+    ln -s /usr/local/go/bin/go /usr/local/bin/go
 fi
 
 # install dasel if not already installed
