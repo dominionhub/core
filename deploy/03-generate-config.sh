@@ -52,6 +52,7 @@ create_primary_validator_config(){
   echo $(dominiond keys show -a bob-alpha --keyring-backend test)
   
   dasel put -t bool -f $app_toml api.enable -v true
+  dasel put -t bool -f $app_toml api.enabled-unsafe-cors -v true
   dasel put -t string -f $app_toml api.address -v tcp://0.0.0.0:1317
   dasel put -t string -f $app_toml minimum-gas-prices -v 0uminion
   #dasel put -t bool -f $app_toml api.swagger true
@@ -98,6 +99,15 @@ create_validator_config(){
   | dasel -r json ".node_info.id" | tr -d '"')
   curl "http://${PRIMARY_VALIDATOR_ADDR}:26657/genesis" | dasel -r json .result.genesis > ~/.dominion/config/genesis.json
   dasel put -t string -f $config_toml p2p.persistent_peers -v "${PRIMARY_VALIDATOR_ID}@${PRIMARY_VALIDATOR_ADDR}:26656"
+
+  dasel put -t bool -f $app_toml api.enable -v true
+  dasel put -t bool -f $app_toml api.enabled-unsafe-cors -v true
+  dasel put -t string -f $app_toml api.address -v tcp://0.0.0.0:1317
+  dasel put -t string -f $app_toml minimum-gas-prices -v 0uminion
+  #dasel put -t bool -f $app_toml api.swagger true
+  #dasel put -t bool -f $app_toml grpc-web true
+  dasel put -t string -f $config_toml chain-id -v $CHAIN_ID
+  dasel put -t string -f $config_toml rpc.laddr -v tcp://0.0.0.0:26657
 }
 
 # obtain moniker and chain_id from args
