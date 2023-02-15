@@ -29,10 +29,13 @@ if [ -z "$MONIKER" ] || [ -z "$CHAIN_ID" ] || [ -z "$PRIMARY_VALIDATOR_ADDRESS" 
     exit 1
 fi
 
+# get validator public key
+VALIDATOR_PUBKEY=$(dominiond tendermint show-validator | dasel -r json .key | tr -d '"')
+
 # using dominiond generate a create-validator transaction
 dominiond tx staking create-validator \
   --amount=10000000000uminion \
-  --pubkey=$(dominiond tendermint show-validator) \
+  --pubkey=$VALIDATOR_PUBKEY \
   --chain-id=$CHAIN_ID \
   --moniker=$MONIKER \
   --commission-rate="0.10" \
