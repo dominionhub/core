@@ -57,6 +57,7 @@ create_primary_validator_config(){
   dasel put -t string -f $app_toml minimum-gas-prices -v 0uminion
   #dasel put -t bool -f $app_toml api.swagger true
   #dasel put -t bool -f $app_toml grpc-web true
+  dasel put -t string -f $config_toml  -s ".rpc.cors_allowed_origins.[]" -v '*'
   dasel put -t string -f $config_toml chain-id -v $CHAIN_ID
   dasel put -t string -f $config_toml rpc.laddr -v tcp://0.0.0.0:26657
 }
