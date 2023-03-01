@@ -5,3 +5,4 @@ release/
 .vscode/
 .DS_Store
 wasm_testing/testing/node_modules
+dominiond

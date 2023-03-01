@@ -1,0 +1,24 @@
+FROM debian:stable-slim
+#USER root
+WORKDIR /app
+COPY ./ .
+ENV PATH=$PATH:/usr/local/go/bin
+RUN ./deploy/01-install.sh
+RUN ./deploy/02-build.sh
+#RUN ./deploy/03-join-validator.sh -c=dominion -m=alpha -pva=
+
+# ======== Below is NOT Working ===========
+#FROM golang:1.18-alpine
+#WORKDIR /app
+#COPY --from=0 /app/deploy/ ./deploy/
+#COPY --from=0 /app/dominiond /bin/
+#COPY --from=0 /go/bin/dasel /bin/
+EXPOSE 1317
+EXPOSE 26657
+EXPOSE 26656
+EXPOSE 9090
+#a indefinite loop to keep the container running
+#ENTRYPOINT ["tail", "-f", "/dev/null"]
+
+#
+#ENTRYPOINT ["dominiond", "start"]
