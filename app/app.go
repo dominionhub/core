@@ -455,7 +455,10 @@ func New(
 	app.EvidenceKeeper = *evidenceKeeper
 	// WASM
 	wasmDir := filepath.Join(homePath, "wasm")
+    // Print appOpts to ignite stdout
+    fmt.Println(appOpts)
 	wasmConfig, err := wasm.ReadWasmConfig(appOpts)
+
 	if err != nil {
 		panic(fmt.Sprintf("error while reading wasm config: %s", err))
 	}

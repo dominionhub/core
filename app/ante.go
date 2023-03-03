@@ -4,10 +4,10 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/cosmos/cosmos-sdk/x/auth/ante"
-	ibcante "github.com/cosmos/ibc-go/v3/modules/core/ante"
+	//ibcante "github.com/cosmos/ibc-go/v3/modules/core/ante"
 	"github.com/cosmos/ibc-go/v3/modules/core/keeper"
 
-	wasmkeeper "github.com/CosmWasm/wasmd/x/wasm/keeper"
+	//wasmkeeper "github.com/CosmWasm/wasmd/x/wasm/keeper"
 	wasmTypes "github.com/CosmWasm/wasmd/x/wasm/types"
 )
 
@@ -44,23 +44,23 @@ func NewAnteHandler(options HandlerOptions) (sdk.AnteHandler, error) {
 	}
 
 	anteDecorators := []sdk.AnteDecorator{
-		ante.NewSetUpContextDecorator(), // outermost AnteDecorator. SetUpContext must be called first
-		wasmkeeper.NewLimitSimulationGasDecorator(options.WasmConfig.SimulationGasLimit), // after setup context to enforce limits early
-		wasmkeeper.NewCountTXDecorator(options.TXCounterStoreKey),
-		ante.NewRejectExtensionOptionsDecorator(),
-		ante.NewMempoolFeeDecorator(),
-		ante.NewValidateBasicDecorator(),
-		ante.NewTxTimeoutHeightDecorator(),
-		ante.NewValidateMemoDecorator(options.AccountKeeper),
-		ante.NewConsumeGasForTxSizeDecorator(options.AccountKeeper),
-		ante.NewDeductFeeDecorator(options.AccountKeeper, options.BankKeeper, options.FeegrantKeeper),
+		//ante.NewSetUpContextDecorator(), // outermost AnteDecorator. SetUpContext must be called first
+		//wasmkeeper.NewLimitSimulationGasDecorator(options.WasmConfig.SimulationGasLimit), // after setup context to enforce limits early
+		//wasmkeeper.NewCountTXDecorator(options.TXCounterStoreKey),
+		//ante.NewRejectExtensionOptionsDecorator(),
+		//ante.NewMempoolFeeDecorator(),
+		//ante.NewValidateBasicDecorator(),
+		//ante.NewTxTimeoutHeightDecorator(),
+		//ante.NewValidateMemoDecorator(options.AccountKeeper),
+		//ante.NewConsumeGasForTxSizeDecorator(options.AccountKeeper),
+		//ante.NewDeductFeeDecorator(options.AccountKeeper, options.BankKeeper, options.FeegrantKeeper),
 		// SetPubKeyDecorator must be called before all signature verification decorators
-		ante.NewSetPubKeyDecorator(options.AccountKeeper),
-		ante.NewValidateSigCountDecorator(options.AccountKeeper),
-		ante.NewSigGasConsumeDecorator(options.AccountKeeper, sigGasConsumer),
-		ante.NewSigVerificationDecorator(options.AccountKeeper, options.SignModeHandler),
-		ante.NewIncrementSequenceDecorator(options.AccountKeeper),
-		ibcante.NewAnteDecorator(options.IBCKeeper),
+		//ante.NewSetPubKeyDecorator(options.AccountKeeper),
+		//ante.NewValidateSigCountDecorator(options.AccountKeeper),
+		//ante.NewSigGasConsumeDecorator(options.AccountKeeper, sigGasConsumer),
+		//ante.NewSigVerificationDecorator(options.AccountKeeper, options.SignModeHandler),
+		//ante.NewIncrementSequenceDecorator(options.AccountKeeper),
+		//ibcante.NewAnteDecorator(options.IBCKeeper),
 	}
 
 	return sdk.ChainAnteDecorators(anteDecorators...), nil
