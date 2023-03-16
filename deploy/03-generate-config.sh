@@ -36,8 +36,8 @@ create_primary_validator_config(){
   echo $BOB_TEXT >> bob.txt
   
   # Setup the genesis accounts 
-  dominiond add-genesis-account $(dominiond keys show -a alice-alpha --keyring-backend test) 1000000000000uminion
-  dominiond add-genesis-account $(dominiond keys show -a bob-alpha --keyring-backend test) 1000000000000uminion
+  dominiond add-genesis-account $(dominiond keys show -a alice-alpha --keyring-backend test) 10000000000000uminion
+  dominiond add-genesis-account $(dominiond keys show -a bob-alpha --keyring-backend test) 10000000000000uminion
   
   # Setup alice as the validator
   dominiond gentx alice-alpha 10000000000uminion --keyring-backend test --chain-id $CHAIN_ID
