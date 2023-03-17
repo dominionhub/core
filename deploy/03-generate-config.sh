@@ -157,5 +157,5 @@ fi
 
 
 # using simd send 100 tokens from alice to bob 
-# dominiond tx bank send $(dominiond keys show -a alice-alpha --keyring-backend test) $(dominiond keys show -a bob-alpha --keyring-backend test) 1000000000uminion --keyring-backend test -y
+# dominiond tx bank send $(dominiond keys show -a bob-alpha --keyring-backend test) <ADDR> 10000000000uminion --keyring-backend test -y
 

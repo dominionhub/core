@@ -1,14 +1,13 @@
 package app
 
 import (
-	wasmkeeper "github.com/CosmWasm/wasmd/x/wasm/keeper"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/cosmos/cosmos-sdk/x/auth/ante"
-	//ibcante "github.com/cosmos/ibc-go/v3/modules/core/ante"
+	ibcante "github.com/cosmos/ibc-go/v3/modules/core/ante"
 	"github.com/cosmos/ibc-go/v3/modules/core/keeper"
 
-	//wasmkeeper "github.com/CosmWasm/wasmd/x/wasm/keeper"
+	wasmkeeper "github.com/CosmWasm/wasmd/x/wasm/keeper"
 	wasmTypes "github.com/CosmWasm/wasmd/x/wasm/types"
 )
 
@@ -61,7 +60,7 @@ func NewAnteHandler(options HandlerOptions) (sdk.AnteHandler, error) {
 		//ante.NewSigGasConsumeDecorator(options.AccountKeeper, sigGasConsumer),
 		ante.NewSigVerificationDecorator(options.AccountKeeper, options.SignModeHandler),
 		ante.NewIncrementSequenceDecorator(options.AccountKeeper),
-		//ibcante.NewAnteDecorator(options.IBCKeeper),
+		ibcante.NewAnteDecorator(options.IBCKeeper),
 	}
 
 	return sdk.ChainAnteDecorators(anteDecorators...), nil
