@@ -48,3 +48,4 @@ dominiond tx staking create-validator \
   --keyring-backend test \
   --node="http://${PRIMARY_VALIDATOR_ADDRESS}:26657" \
   -y
+

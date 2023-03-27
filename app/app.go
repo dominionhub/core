@@ -455,7 +455,10 @@ func New(
 	app.EvidenceKeeper = *evidenceKeeper
 	// WASM
 	wasmDir := filepath.Join(homePath, "wasm")
+	// Print appOpts to ignite stdout
+	fmt.Println(appOpts)
 	wasmConfig, err := wasm.ReadWasmConfig(appOpts)
+
 	if err != nil {
 		panic(fmt.Sprintf("error while reading wasm config: %s", err))
 	}
@@ -650,6 +653,7 @@ func New(
 
 	app.mm.RegisterInvariants(&app.CrisisKeeper)
 	app.mm.RegisterRoutes(app.Router(), app.QueryRouter(), encodingConfig.Amino)
+	cfg := module.NewConfigurator(appCodec, app.MsgServiceRouter(), app.GRPCQueryRouter())
 	app.mm.RegisterServices(module.NewConfigurator(app.appCodec, app.MsgServiceRouter(), app.GRPCQueryRouter()))
 
 	// create the simulation manager and define the order of the modules for deterministic simulations
@@ -679,7 +683,8 @@ func New(
 	app.MountKVStores(keys)
 	app.MountTransientStores(tkeys)
 	app.MountMemoryStores(memKeys)
-
+	// register upgrade
+	app.RegisterUpgradeHandlers(cfg)
 	// initialize BaseApp
 	app.SetInitChainer(app.InitChainer)
 	app.SetBeginBlocker(app.BeginBlocker)
