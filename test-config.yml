@@ -8,48 +8,77 @@ build:
 accounts:
   - name: alice
     coins:
-      - 2000000000minion
+      - 2000000000uminion
       - 200000000stake
     mnemonic: sell steak donate cost ice object hawk cool hill similar economy school spy cactus crater pizza leisure bitter toast regular auction kitten mansion broken
   - name: bob
     coins:
-      - 1000000000minion
+      - 1000000000uminion
       - 100000000stake
     mnemonic: club art earn depend empower decade toast tuna require have ocean must rare engage often better property nurse depend frozen art accident team umbrella
   - name: charlie
     coins:
-      - 1000000000minion
+      - 1000000000uminion
       - 100000000stake
     mnemonic: winner deputy ketchup aspect deliver expect month focus strong armor dwarf theory nuclear much own admit feed marriage morning prize drama cheese soldier immense
   - name: ramil-alpha
     coins:
-      - 1000000000minion
+      - 1000000000uminion
       - 100000000stake
     mnemonic: umbrella find mammal achieve disagree property moral baby only crystal initial fly vault fringe burger aunt supreme way palace family blue great come mimic
   - name: ramil-beta
     coins:
-      - 1000000000minion
+      - 1000000000uminion
       - 100000000stake
     mnemonic: jeans drive render assist vapor relief people dose picture swamp vibrant charge void crop believe million renew rescue mouse travel ceiling where jungle road
   - name: max-payne
     coins:
-      - 1000000000minion
+      - 1000000000uminion
       - 100000000stake
     mnemonic: cabin pizza noise unfair intact earn injury abandon barely blame daughter ski stereo nurse entry badge trophy physical barrel cool until luxury useless million
   - name: bruce-wayne
     coins:
-      - 1000000000minion
+      - 1000000000uminion
       - 100000000stake
     mnemonic: unfold sibling pelican spin you ride magnet lion drum digital palm drastic human injury north poet output shy indicate timber chair goose kitchen between
+
 faucet:
   name: charlie
   coins:
     - 5stake
-    - 1000000000minion
+    - 1000000000uminion
   host: 0.0.0.0:4500
+
 client:
   openapi:
     path: docs/static/openapi.yml
+
 validators:
   - name: alice
-    bonded: 100000000stake
+    bonded: 100000000uminion
+    config:
+      consensus:
+        timeout_commit: "2.5s"
+        timeout_proprose: "1s"
+
+genesis:
+  app_state:
+    crisis:
+      constant_fee:
+        amount: "100000000"
+        denom: uminion
+    gov:
+      deposit_params:
+        max_deposit_period: "2s"
+        min_deposit:
+          - amount: "100000000"
+            denom: uminion
+      voting_params:
+        voting_period: "5s"
+    mint:
+      params:
+        mint_denom: uminion
+    staking:
+      params:
+        bond_denom: uminion
+        unbonding_time: "1s"

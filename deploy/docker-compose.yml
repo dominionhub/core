@@ -1,8 +1,8 @@
-version: "3.9" 
+version: "3.9"
 services:
   node0:
     container_name: dominion-alpha
-    build: 
+    build:
       context: ../
       dockerfile: deploy/Dockerfile.alpha
     ports:
@@ -16,7 +16,7 @@ services:
         ipv4_address: 192.168.0.2
   node1:
     container_name: dominion-beta
-    build: 
+    build:
       context: ../
       dockerfile: deploy/Dockerfile.beta
     ports:
@@ -31,7 +31,7 @@ services:
     entrypoint:
       - /bin/bash
       - -c
-      - | 
+      - |
         ./deploy/03-generate-config.sh -c=dominion -m=beta -pva=192.168.0.2
         dominiond start
 
