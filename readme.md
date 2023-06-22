@@ -1,52 +1,65 @@
-# dominion
-**dominion** is a blockchain built using Cosmos SDK and Tendermint and created with [Ignite CLI](https://ignite.com/cli).
+![Banner](assets/banner-small.png)
 
-## Get started
+# Dominion: Decentralized Community Owned Gaming Hub.
 
+Dominion is a one-of-its-kind decentralized gaming platform built on a Cosmos SDK blockchain and Leveraging Cosmwasm & Zero-Knowledge-Proofs. This platform offers a secure, transparent, and trustless environment for gamers, developers, and other stakeholders in the gaming ecosystem. With Dominion, users can enjoy a seamless gaming experience while benefiting from the underlying blockchain technology, which ensures fairness, security, and interoperability with other platforms through the Inter-Blockchain Communication (IBC) protocol.
+
+## Getting Started
+
+To run the Dominion blockchain, follow these basic steps:
+
+### Prerequisites
+
+- Install [Go](https://golang.org/doc/install) (version 1.17 or later)
+- Install [Ignite CLI](https://tutorials.cosmos.network/hands-on-exercise/1-ignite-cli/1-ignitecli.html) (version 0.25.2 or later) by running:
+  ```
+  $ curl https://get.starport.network/cli! | sudo bash
+  ```
+
+### Steps to Run the Chain
+
+1. Clone the Dominion repository:
+   ```
+   $ git clone https://github.com/dominionhub/core.git
+   ```
+
+2. Change into the Dominion directory:
+   ```
+   $ cd dominionhub
+   ```
+
+3. Build the Dominion binary:
+   ```
+   $ ignite build
+   ```
+
+4. Initialize the Dominion node:
+   ```
+   $ ./dominiond init [moniker] --chain-id dominion
+   ```
+
+5. Start the Dominion node:
+   ```
+   $ ./dominiond start
+   ```
+
+Now, the Dominion blockchain should be up and running.
+
+### Alternatively (For Dev)
+
+You can also use 
 ```
-ignite chain serve
+ignite chain serve 
 ```
 
-`serve` command installs dependencies, builds, initializes, and starts your blockchain in development.
+## About Dominion
 
-### Configure
+Dominion aims to revolutionize the gaming industry by providing a decentralized platform where gamers, developers, and other stakeholders can interact in a transparent and secure manner. This platform leverages the power of the Cosmos SDK and Tendermint consensus algorithm to create a highly scalable and interoperable blockchain solution designed specifically for gaming applications.
 
-Your blockchain in development can be configured with `config.yml`. To learn more, see the [Ignite CLI docs](https://docs.ignite.com).
+Some key features of the Dominion platform include:
 
-### Web Frontend
+- **Decentralized Governance**: Dominion's governance model allows for community-driven decision-making, ensuring that the platform remains fair and balanced for all users.
+- **Interoperability**: Utilizing the IBC protocol, Dominion can seamlessly connect with other blockchains, enabling cross-chain communication and asset transfers.
+- **Scalability**: Built on the Cosmos SDK, Dominion can handle a large number of transactions and users, ensuring a smooth gaming experience for all participants.
 
-Ignite CLI has scaffolded a Vue.js-based web app in the `vue` directory. Run the following commands to install dependencies and start the app:
-
-```
-cd vue
-npm install
-npm run serve
-```
-
-The frontend app is built using the `@starport/vue` and `@starport/vuex` packages. For details, see the [monorepo for Ignite front-end development](https://github.com/ignite/web).
-
-## Release
-To release a new version of your blockchain, create and push a new tag with `v` prefix. A new draft release with the configured targets will be created.
-
-```
-git tag v0.1
-git push origin v0.1
-```
-
-After a draft release is created, make your final changes from the release page and publish it.
-
-### Install
-To install the latest version of your blockchain node's binary, execute the following command on your machine:
-
-```
-curl https://get.ignite.com/username/dominion@latest! | sudo bash
-```
-`username/dominion` should match the `username` and `repo_name` of the Github repository to which the source code was pushed. Learn more about [the install process](https://github.com/allinbits/starport-installer).
-
-## Learn more
-
-- [Ignite CLI](https://ignite.com/cli)
-- [Tutorials](https://docs.ignite.com/guide)
-- [Ignite CLI docs](https://docs.ignite.com)
-- [Cosmos SDK docs](https://docs.cosmos.network)
-- [Developer Chat](https://discord.gg/ignite)
+Dominion is poised to disrupt the gaming industry by providing a decentralized, secure, and scalable platform for the next generation of gaming applications. By leveraging the power of blockchain technology, Dominion aims to create a thriving ecosystem that benefits gamers, developers, and other stakeholders in the gaming world.
